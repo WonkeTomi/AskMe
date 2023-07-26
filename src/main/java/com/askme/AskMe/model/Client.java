@@ -2,8 +2,7 @@ package com.askme.AskMe.model;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,6 +13,9 @@ import java.util.Collection;
 @Setter
 @Entity
 @Table
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Client implements UserDetails {
 
     @Column
@@ -24,7 +26,7 @@ public class Client implements UserDetails {
     private String name;
 
     @Column
-    private String userName;
+    private String username;
 
     @Column
     private String email;
