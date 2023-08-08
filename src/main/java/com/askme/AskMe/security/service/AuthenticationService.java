@@ -38,7 +38,7 @@ public class AuthenticationService {
 
     public AuthResponse autenticate(AuthenticationRequest authRequest) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-        UserDetails userDetails = clientRepository.findByUserName(authRequest.getUsername())
+        UserDetails userDetails = clientRepository.findByUsername(authRequest.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("There are no such username"));
 
         var jwtToken = jwtService.generateToken(userDetails);
