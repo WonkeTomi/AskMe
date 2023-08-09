@@ -36,7 +36,7 @@ public class AuthenticationService {
         return "registration successfully";
     }
 
-    public AuthResponse autenticate(AuthenticationRequest authRequest) {
+    public AuthResponse authenticate(AuthenticationRequest authRequest) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
         UserDetails userDetails = clientRepository.findByUsername(authRequest.getUsername())
                 .orElseThrow(() -> new UsernameNotFoundException("There are no such username"));
