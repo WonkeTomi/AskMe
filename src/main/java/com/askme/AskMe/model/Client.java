@@ -22,12 +22,13 @@ public class Client implements UserDetails {
 
     @Column
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column
     private String name;
 
-    @Column
+    @Column(unique = true)
     private String username;
 
     @Column
