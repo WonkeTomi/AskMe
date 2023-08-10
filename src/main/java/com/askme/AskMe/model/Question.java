@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,8 +30,9 @@ public class Question {
     @Column
     private String question;
 
-//    @Column
-//    private List<Answer> answerIds;
+    @Column
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answerIds;
 
     @Column
     private LocalDate date;
