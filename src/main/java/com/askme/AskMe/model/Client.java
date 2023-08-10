@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -40,6 +41,10 @@ public class Client implements UserDetails {
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column
+    @OneToMany(mappedBy = "client")
+    private Set<Question> questions;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
