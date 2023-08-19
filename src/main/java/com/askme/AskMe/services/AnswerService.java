@@ -2,6 +2,7 @@ package com.askme.AskMe.services;
 
 import com.askme.AskMe.model.Answer;
 import com.askme.AskMe.repository.AnswerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,21 +19,17 @@ public class AnswerService {
     }
 
     public Answer findAnswerById(Long id) {
-        return answerRepository.findById(id).orElse(null);
+        return answerRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public List<Answer> findAnswersToAQuestion(Long questionId) {
         return answerRepository.findAllByQuestionId(questionId);
     }
 
-    public void updateAnswer(Long id, String answer) throws Exception {
+    public void updateAnswer(Long id, String answer) {
         Answer answerToUpdate = findAnswerById(id);
-        if (answerToUpdate != null) {
-            answerToUpdate.setAnswer(answer);
-            answerRepository.save(answerToUpdate);
-        } else {
-            throw new Exception("Didn't find that answer.");
-        }
+        answerToUpdate.setAnswer(answer);
+        answerRepository.save(answerToUpdate);
     }
 
     public void deleteAnswerById(Long id) {
