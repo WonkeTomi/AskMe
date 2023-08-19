@@ -2,9 +2,11 @@ package com.askme.AskMe.services;
 
 import com.askme.AskMe.model.Question;
 import com.askme.AskMe.repository.QuestionRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @Service
@@ -14,7 +16,7 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
 
     public Question findQuestionById(Long id) {
-        return questionRepository.findById(id).orElse(null);
+        return questionRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public List<Question> findAllQuestion() {
@@ -25,14 +27,10 @@ public class QuestionService {
         questionRepository.save(question);
     }
 
-    public void updateQuestion(Long id, String question) throws Exception {
+    public void updateQuestion(Long id, String question) {
         Question questionToUpdate = findQuestionById(id);
-        if (questionToUpdate != null) {
-            questionToUpdate.setQuestion(question);
-            questionRepository.save(questionToUpdate);
-        } else {
-            throw new Exception("Didn't find the question");
-        }
+        questionToUpdate.setQuestion(question);
+        questionRepository.save(questionToUpdate);
     }
 
     public void deleteQuestion(Long id) {
