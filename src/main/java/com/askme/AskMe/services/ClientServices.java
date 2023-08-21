@@ -24,8 +24,8 @@ public class ClientServices {
         return clientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public void addQuestionToClientList(Long clinetId, Question question) {
-        Client client = getClientById(clinetId);
+    public void addQuestionToClientList(Long clientId, Question question) {
+        Client client = getClientById(clientId);
         Set<Question> clientQuestions = client.getQuestions();
         clientQuestions.add(question);
         clientRepository.save(client);
