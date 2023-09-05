@@ -25,6 +25,7 @@ public class SecurityConfig {
                 .headers().frameOptions().sameOrigin()
                 .and()
                 .authorizeHttpRequests()
+                .requestMatchers("/").permitAll()
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/register").permitAll()
                 .requestMatchers(toH2Console()).permitAll()

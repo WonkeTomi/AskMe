@@ -15,7 +15,9 @@ import java.util.function.Function;
 @Service
 public class JWTService {
 
-    private final String secretKey = System.getenv("secretKey");
+    // I know that the secret key doesn't belong here
+    //It just easier to now leave it here
+    private final String secretKey = "3778214125442A472D4B6150645267556B58703273357638792F423F4528482B";
 
     public String generateToken(UserDetails userDetails){
         return Jwts.builder()
